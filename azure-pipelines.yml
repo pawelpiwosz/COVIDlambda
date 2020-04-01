@@ -8,8 +8,20 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.8'
-- task: PyLint@0
+- task: DockerInstaller@0
   inputs:
-    pythonroot: 'py/'
-    reqfile: 'requirements.txt'
-    modules: 'covidlambda'
+    dockerVersion: '17.09.0-ce'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      docker pull almerhor/pylint:default
+  displayName: 'Pull docker images'
+
+- task:
+  inputs:
+    targetType: 'inline'
+    script: |
+      mkdir /tmp/config-custom
+      docker run --rm -v $pwd:/pylint -v $pwd/test:/tmp/config-custom almerhor/pylint:default py/covidlambda.py #requirements-custom.txt
