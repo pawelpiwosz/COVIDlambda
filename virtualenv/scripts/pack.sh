@@ -5,7 +5,7 @@ cd covid/lib/python3.6/site-packages/
 pwd
 ls ../../../../
 zip -g -r ./../../../../artifacts/covidlambda.zip . 
-cd ~
+cd ../../../../
 ls -al artifacts/
 cd py
 pwd && ls -al
