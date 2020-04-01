@@ -15,12 +15,6 @@ steps:
     script: |
       mkdir tests
       mkdir artifacts
-  displayName: 'Prepare env'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
       pip install pylint
       pip install -r requirements.txt
       pylint py/covidlambda.py --reports=yes --output-format=msvs > tests/report.txt
