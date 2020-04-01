@@ -1,8 +1,12 @@
 ! /bin/bash
 mkdir artifacts
+ls -al
 cd covid/lib/python3.6/site-packages/
+pwd
 zip -g -r ./../../package/covidlambda.zip . 
-cd ../../../py
+cd
+ls -al artifacts
+cd py
 pwd && ls -al
 zip -g ../artifacts/covidlambda.zip covidlambda.py
 cd ..
