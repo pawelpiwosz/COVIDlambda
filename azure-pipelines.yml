@@ -20,13 +20,6 @@ steps:
       pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
   displayName: 'pylint'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: 'tests'
-    artifact: 'report.txt'
-    publishLocation: 'pipeline'
-  displayName: 'Publish pylint report'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: 'py/covidlambda.py'
@@ -57,3 +50,18 @@ steps:
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      pip install cfn-lint
+      cfn-lint cloudformation/covidlambda.yml > tests/cf.txt
+ displayName: 'cfnlint'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'tests/'
+    artifact: 'reports'
+    publishLocation: 'pipeline'
+  displayName: 'Publish reports'
