@@ -25,3 +25,5 @@ steps:
     script: |
       mkdir /tmp/config-custom
       docker run --rm -v $(pwd):/pylint -v $(pwd)/test:/tmp/config-custom almerhor/pylint:default py/covidlambda.py requirements-custom.txt
+      ls -l
+      ls -l /py
