@@ -29,18 +29,28 @@ steps:
 #       ls -la
 #       ls -la py
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      pip install pylint
-      pip install -r requirements.txt
-      pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
-      ls -al
-      ls -al py
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       pip install pylint
+#       pip install -r requirements.txt
+#       pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
+#       ls -al
+#       ls -al py
+#   displayName: 'pylint'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: 'report.txt'
-    testRunTitle: 'Pylint'
+- task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        pip install flake8
+        pip install -r requirements.txt
+        flake8 py/covidlambda.py --statistics=true --output-file report.txt
+    displayName: 'flake8'
+
+# - task: PublishTestResults@2
+#   inputs:
+#     testResultsFormat: 'VSTest'
+#     testResultsFiles: 'report.txt'
+#     testRunTitle: 'Pylint'
