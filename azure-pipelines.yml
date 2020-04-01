@@ -35,6 +35,6 @@ steps:
     script: |
       pip install pylint
       pip install -r requirements.txt
-      pylint py/covidlambda.py --reports=yes --output-format=json
+      pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
       ls -al
       ls -al py
