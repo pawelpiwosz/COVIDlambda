@@ -16,9 +16,14 @@ steps:
       pip install pylint
       pip install -r requirements.txt
       mkdir tests
+      mkdir artifacts
+  displayName: 'Prepare env'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
       pylint py/covidlambda.py --reports=yes --output-format=msvs > tests/report.txt
-      ls -al
-      ls -al py
   displayName: 'pylint'
 
 - task: PublishPipelineArtifact@1
@@ -26,4 +31,19 @@ steps:
     targetPath: 'tests'
     artifact: 'report.txt'
     publishLocation: 'pipeline'
-  displayName: 'Publish pylint'
+  displayName: 'Publish pylint report'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'artifacts/covidlambda.py'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: 'covidlambda.zip'
+    replaceExistingArchive: true
+  displayName: 'Pack artifact'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'covidlambda'
+    publishLocation: 'Container'
