@@ -38,3 +38,9 @@ steps:
       pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
       ls -al
       ls -al py
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: 'report.txt'
+    testRunTitle: 'Pylint'
