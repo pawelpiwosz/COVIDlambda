@@ -1,4 +1,4 @@
 [REPORTS]
 
-output-format=html
+output-format=msvs
 files-output=yes

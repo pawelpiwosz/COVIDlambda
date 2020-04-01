@@ -34,4 +34,4 @@ steps:
     script: |
       pip install pylint
       pip install -r test/requirements.txt
-      pylint py/covidlambda.py --files-output=yes --output-format=html
+      pylint py/covidlambda.py --files-output=yes --output-format=msvs
