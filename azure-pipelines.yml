@@ -41,3 +41,19 @@ steps:
     PathtoPublish: 'artifacts'
     ArtifactName: 'covidlambda'
     publishLocation: 'Container'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud-covidlambda'
+    organization: 'covidlambda'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'covidlambda'
+    cliProjectName: 'COVIDlambda'
+    cliSources: 'py/'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
