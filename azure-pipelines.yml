@@ -9,50 +9,19 @@ steps:
   inputs:
     versionSpec: '3.8'
 
-# - task: DockerInstaller@0
-#   inputs:
-#     dockerVersion: '17.09.0-ce'
-
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       docker pull almerhor/pylint:default
-#   displayName: 'Pull docker images'
-
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       mkdir /tmp/config-custom
-#       docker run --rm -v $(pwd):/pylint -v $(pwd)/test:/tmp/config-custom almerhor/pylint:default py/covidlambda.py requirements-custom.txt  
-#       ls -la
-#       ls -la py
-
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       pip install pylint
-#       pip install -r requirements.txt
-#       pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
-#       ls -al
-#       ls -al py
-#   displayName: 'pylint'
-
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
-      pip install flake8
+      pip install pylint
       pip install -r requirements.txt
-      flake8 py/covidlambda.py --statistics --output-file=report.txt
+      pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
       ls -al
-      cat report.txt
-  displayName: 'flake8'
+      ls -al py
+  displayName: 'pylint'
 
-# - task: PublishTestResults@2
-#   inputs:
-#     testResultsFormat: 'VSTest'
-#     testResultsFiles: 'report.txt'
-#     testRunTitle: 'Pylint'
+  - task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'report.txt'
+    publishLocation: 'pipeline'
