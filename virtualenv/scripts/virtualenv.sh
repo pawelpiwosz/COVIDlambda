@@ -2,6 +2,8 @@
 
 echo "Create virtualenv for COVID scripts"
 
+pip install virtualenv
+
 virtualenv covid -p python3.6
 # create virtualenv called ansible with python3.6.
 
