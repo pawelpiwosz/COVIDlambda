@@ -25,6 +25,10 @@ steps:
     filePath: 'virtualenv/scripts/virtualenv.sh'
   displayName: 'Create Virtualenv'
 
+- task: Bash@3
+  inputs:
+    filePath: 'virtualenv/scripts/pack.sh'
+  displayName: 'Create artifact'
 
 # - task: ArchiveFiles@2
 #   inputs:
