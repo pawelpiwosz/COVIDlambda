@@ -9,28 +9,21 @@ steps:
   inputs:
     versionSpec: '3.8'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      pip install pylint
-      pip install -r requirements.txt
-      mkdir tests
-      ls -al
-      pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
-  displayName: 'pylint'
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       pip install pylint
+#       pip install -r requirements.txt
+#       mkdir tests
+#       ls -al
+#       pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
+#   displayName: 'pylint'
 
 - task: Bash@3
   inputs:
     filePath: 'virtualenv/scripts/virtualenv.sh'
   displayName: 'Create Virtualenv'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      ls -al 
-      ls -al virtualenv
 
 
 # - task: ArchiveFiles@2
