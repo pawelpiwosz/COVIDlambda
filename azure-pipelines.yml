@@ -29,12 +29,6 @@ steps:
 #     replaceExistingArchive: true
 #   displayName: 'Pack artifact'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'artifacts'
-    ArtifactName: 'covidlambda'
-    publishLocation: 'Container'
-
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonarcloud-covidlambda'
@@ -75,3 +69,9 @@ steps:
   inputs:
     filePath: 'virtualenv/scripts/pack.sh'
   displayName: 'Create artifact'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'covidlambda'
+    publishLocation: 'Container'
