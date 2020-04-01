@@ -56,7 +56,7 @@ steps:
     targetType: 'inline'
     script: |
       pip install cfn-lint
-      cfn-lint cloudformation/covidlambda.yml > tests/cf.txt
+      cfn-lint -I -f parseable cloudformation/covidlambda.yml > tests/cf.txt
   displayName: 'cfnlint'
 
 - task: PublishPipelineArtifact@1
