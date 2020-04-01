@@ -17,7 +17,7 @@ steps:
       pip install -r requirements.txt
       mkdir tests
       ls -al
-      pylint py/covidlambda.py --reports=yes --output-format=msvs > tests/report.txt
+      pylint py/covidlambda.py --reports=yes --output-format=msvs #> tests/report.txt
   displayName: 'pylint'
 
 - task: PublishPipelineArtifact@1
