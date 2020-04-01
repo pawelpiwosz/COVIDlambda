@@ -25,7 +25,7 @@ steps:
     filePath: 'virtualenv/scripts/virtualenv.sh'
   displayName: 'Create Virtualenv'
 
-- task: Bash3@
+- task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
