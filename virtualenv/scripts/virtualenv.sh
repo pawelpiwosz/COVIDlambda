@@ -12,5 +12,5 @@ ls -al
 #activate the virtualenv.
 
 ls -al
-pip install -r $(pwd)/virtualenv/scripts/requirements.txt
+pip install -r requirements.txt
 # install needed packages inside the virtualenv.
