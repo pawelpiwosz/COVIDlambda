@@ -57,7 +57,7 @@ steps:
     script: |
       pip install cfn-lint
       cfn-lint cloudformation/covidlambda.yml > tests/cf.txt
- displayName: 'cfnlint'
+  displayName: 'cfnlint'
 
 - task: PublishPipelineArtifact@1
   inputs:
