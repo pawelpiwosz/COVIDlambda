@@ -13,4 +13,5 @@ virtualenv covid -p python3.6
 pip install -r requirements.txt
 # install needed packages inside the virtualenv.
 
-ls -al covid/lib/
+ls -al covid/lib/python3.6/
+ls -al covid/lib/python3.6/site-packages
