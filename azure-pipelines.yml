@@ -9,16 +9,16 @@ steps:
   inputs:
     versionSpec: '3.8'
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       pip install pylint
-#       pip install -r requirements.txt
-#       mkdir tests
-#       ls -al
-#       pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
-#   displayName: 'pylint'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      pip install pylint
+      pip install -r requirements.txt
+      mkdir tests
+      ls -al
+      pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
+  displayName: 'pylint'
 
 - task: Bash@3
   inputs:
@@ -39,39 +39,39 @@ steps:
 #     replaceExistingArchive: true
 #   displayName: 'Pack artifact'
 
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: 'artifacts'
-#     ArtifactName: 'covidlambda'
-#     publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'covidlambda'
+    publishLocation: 'Container'
 
-# - task: SonarCloudPrepare@1
-#   inputs:
-#     SonarCloud: 'sonarcloud-covidlambda'
-#     organization: 'covidlambda'
-#     scannerMode: 'CLI'
-#     configMode: 'manual'
-#     cliProjectKey: 'covidlambda'
-#     cliProjectName: 'COVIDlambda'
-#     cliSources: 'py/'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud-covidlambda'
+    organization: 'covidlambda'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'covidlambda'
+    cliProjectName: 'COVIDlambda'
+    cliSources: 'py/'
 
-# - task: SonarCloudAnalyze@1
+- task: SonarCloudAnalyze@1
 
-# - task: SonarCloudPublish@1
-#   inputs:
-#     pollingTimeoutSec: '300'
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       pip install cfn-lint
-#       cfn-lint -I -f parseable cloudformation/covidlambda.yml > tests/cf.txt
-#   displayName: 'cfnlint'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      pip install cfn-lint
+      cfn-lint -I -f parseable cloudformation/covidlambda.yml > tests/cf.txt
+  displayName: 'cfnlint'
 
-# - task: PublishPipelineArtifact@1
-#   inputs:
-#     targetPath: 'tests/'
-#     artifact: 'reports'
-#     publishLocation: 'pipeline'
-#   displayName: 'Publish reports'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'tests/'
+    artifact: 'reports'
+    publishLocation: 'pipeline'
+  displayName: 'Publish reports'
