@@ -74,7 +74,7 @@ def create_response_country(payload, range, country):
                          "today {}, "
                          "active cases {}, "
                          "in critical state {}, "
-                         "deaths {}, "
+                         "deaths today {}, "
                          "all deaths {}, "
                          "recovered {}. "
                          "Cases per million {}, "
