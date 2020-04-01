@@ -1,4 +1,4 @@
-! /bin/bash
+#! /bin/bash
 mkdir artifacts
 ls -al
 cd covid/lib/python3.6/site-packages/
