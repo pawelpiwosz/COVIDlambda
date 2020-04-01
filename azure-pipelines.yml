@@ -20,16 +20,6 @@ steps:
       pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
   displayName: 'pylint'
 
-- task: Bash@3
-  inputs:
-    filePath: 'virtualenv/scripts/virtualenv.sh'
-  displayName: 'Create Virtualenv'
-
-- task: Bash@3
-  inputs:
-    filePath: 'virtualenv/scripts/pack.sh'
-  displayName: 'Create artifact'
-
 # - task: ArchiveFiles@2
 #   inputs:
 #     rootFolderOrFile: 'py/covidlambda.py'
@@ -75,3 +65,13 @@ steps:
     artifact: 'reports'
     publishLocation: 'pipeline'
   displayName: 'Publish reports'
+
+- task: Bash@3
+  inputs:
+    filePath: 'virtualenv/scripts/virtualenv.sh'
+  displayName: 'Create Virtualenv'
+
+- task: Bash@3
+  inputs:
+    filePath: 'virtualenv/scripts/pack.sh'
+  displayName: 'Create artifact'
