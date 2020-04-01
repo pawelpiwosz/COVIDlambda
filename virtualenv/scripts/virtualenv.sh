@@ -14,3 +14,5 @@ ls -al
 ls -al
 pip install -r requirements.txt
 # install needed packages inside the virtualenv.
+
+ls -al covid/
