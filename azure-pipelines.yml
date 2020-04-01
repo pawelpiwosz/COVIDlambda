@@ -29,10 +29,10 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'artifacts/covidlambda.py'
+    rootFolderOrFile: 'py/covidlambda.py'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: 'covidlambda.zip'
+    archiveFile: 'artifacts/covidlambda.zip'
     replaceExistingArchive: true
   displayName: 'Pack artifact'
 
