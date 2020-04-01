@@ -1,0 +1,191 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "corona informator",
+            "modelConfiguration": {
+                "fallbackIntentSensitivity": {
+                    "level": "LOW"
+                }
+            },
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "InfoIntent",
+                    "slots": [
+                        {
+                            "name": "Intro",
+                            "type": "IntroSlot"
+                        },
+                        {
+                            "name": "Country",
+                            "type": "AMAZON.Country"
+                        },
+                        {
+                            "name": "Detail",
+                            "type": "DetailSlot"
+                        },
+                        {
+                            "name": "What",
+                            "type": "whatslot"
+                        }
+                    ],
+                    "samples": [
+                        "{What} from {Country} about {Detail}",
+                        "{Intro} {What} from {Country} about {Detail}",
+                        "{Intro} {What} in {Country}",
+                        "{Intro} {What} about {Detail} in {Country}",
+                        "{Intro} {What} about {Detail} from {Country}",
+                        "{Intro} {What} about {Detail}",
+                        "{Intro} {What}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "IntroSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "about"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "about corona"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "about virus"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "about corona virus"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DetailSlot",
+                    "values": [
+                        {
+                            "id": "all",
+                            "name": {
+                                "value": "All",
+                                "synonyms": [
+                                    "every",
+                                    "everything"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "currentCases",
+                            "name": {
+                                "value": "current cases",
+                                "synonyms": [
+                                    "today cases"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "cases",
+                            "name": {
+                                "value": "cases",
+                                "synonyms": [
+                                    "all cases"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "recovered",
+                            "name": {
+                                "value": "Recovered"
+                            }
+                        },
+                        {
+                            "id": "critical",
+                            "name": {
+                                "value": "critical"
+                            }
+                        },
+                        {
+                            "id": "active",
+                            "name": {
+                                "value": "active"
+                            }
+                        },
+                        {
+                            "id": "deaths",
+                            "name": {
+                                "value": "deaths",
+                                "synonyms": [
+                                    "fatalities"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "currentDeaths",
+                            "name": {
+                                "value": "Current deaths",
+                                "synonyms": [
+                                    "today deaths",
+                                    "current deaths rate"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "whatslot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "insight"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "information"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "data"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "info"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "news"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

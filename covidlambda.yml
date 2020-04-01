@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Main function for Alexa-CovidLambda
+
+Parameters:
+  SkillArn: 
+    Type: String
+    Default: None
+    Description: Enter skill ARN here
+
+Resources:
+  AlexaCovidLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Description: IAM role for Main Alexa-CovidLambda function created by Cloudformation
+      Path: /CovidLambda/
+      RoleName: iam-role-alexa-CovidLambda
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: iam-policy-alexa-CovidLambda
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - 
+                Effect: Allow
+                Action: 
+                  - s3:ListBucket
+                  - s3:GetObject
+                Resource: 
+                  -
+                    !Join
+                      - ''
+                      - - 'arn:aws:s3:::'
+                        - Fn::Sub: ${AWS::Region}
+                        - "-covid-lambda"
+              -
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                Resource:
+                  - 
+                    !Join
+                      - ''
+                      - - 'arn:aws:logs:'
+                        - Fn::Sub: ${AWS::Region}
+                        - ':'
+                        - Fn::Sub: ${AWS::AccountId}
+                        - ':*'
+              - 
+                Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: 
+                  -
+                    !Join
+                      - ''
+                      - - 'arn:aws:logs:'
+                        - Fn::Sub: ${AWS::Region}
+                        - '-'
+                        - Fn::Sub: ${AWS::AccountId}
+                        - ':log-group:/aws/lambda/*'
+              -
+                Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource: '*'
+
+  COVIDFunctionLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Alexa CovidLambda Main Function
+      FunctionName: CovidLambda
+      Code:
+        S3Bucket: !Sub "${AWS::Region}-covid-lambda"
+        S3Key: covidlambda.zip
+      Runtime: python3.6
+      Handler: covidlambda.handler
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt AlexaCovidLambdaRole.Arn
+      Tags:
+        - 
+          Key: Name
+          Value: Alexa-CovidLambda-Main-Function
+        -
+          Key: Project
+          Value: Alexa-CovidLambda
+        -
+          Key: Purpose
+          Value: Alexa CovidLambda Main Function
+
+  MainFunctionSkillTrigger:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !GetAtt 
+        - COVIDFunctionLambda
+        - Arn
+      Principal: 'alexa-appkit.amazon.com'
+      EventSourceToken: !Ref SkillArn
+
+Outputs:
+  MainFunctionArn:
+    Description: Alexa CovidLambda Main Function Arn
+    Value: !GetAtt COVIDFunctionLambda.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-COVIDFunctionLambda"
