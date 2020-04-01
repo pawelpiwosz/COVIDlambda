@@ -33,5 +33,7 @@ steps:
     targetType: 'inline'
     script: |
       pip install pylint
-      pip install -r viirtualenv/scripts/requirements.txt
+      pip install -r virtualenv/scripts/requirements.txt
       pylint py/covidlambda.py --output-format=msvs
+      ls -al
+      ls -al /py
