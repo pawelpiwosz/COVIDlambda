@@ -47,6 +47,8 @@ steps:
       pip install flake8
       pip install -r requirements.txt
       flake8 py/covidlambda.py --statistics --output-file=report.txt
+      ls -al
+      cat report.txt
   displayName: 'flake8'
 
 # - task: PublishTestResults@2
