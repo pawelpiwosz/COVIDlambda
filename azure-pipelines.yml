@@ -20,7 +20,7 @@ steps:
       ls -al py
   displayName: 'pylint'
 
-  - task: PublishPipelineArtifact@1
+- task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'report.txt'
