@@ -8,16 +8,17 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.8'
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      docker pull almerhor/pylint:default
-  displayName: 'Pull docker images'
+# - task: DockerInstaller@0
+#   inputs:
+#     dockerVersion: '17.09.0-ce'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       docker pull almerhor/pylint:default
+#   displayName: 'Pull docker images'
 
 # - task: Bash@3
 #   inputs:
@@ -34,6 +35,6 @@ steps:
     script: |
       pip install pylint
       pip install -r requirements.txt
-      pylint py/covidlambda.py --output-format=msvs
+      pylint py/covidlambda.py --reports=yes --output-format=msvs
       ls -al
       ls -al py
