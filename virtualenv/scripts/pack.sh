@@ -3,7 +3,7 @@ mkdir artifacts
 ls -al
 cd covid/lib/python3.6/site-packages/
 pwd
-zip -g -r ./../../package/covidlambda.zip . 
+zip -g -r ./../../artifacts/covidlambda.zip . 
 cd
 ls -al artifacts
 cd py
