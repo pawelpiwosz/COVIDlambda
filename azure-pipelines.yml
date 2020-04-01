@@ -15,13 +15,15 @@ steps:
     script: |
       pip install pylint
       pip install -r requirements.txt
-      pylint py/covidlambda.py --reports=yes --output-format=msvs > report.txt
+      mkdir tests
+      pylint py/covidlambda.py --reports=yes --output-format=msvs > tests/report.txt
       ls -al
       ls -al py
   displayName: 'pylint'
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: 'tests'
     artifact: 'report.txt'
     publishLocation: 'pipeline'
+  displayName: 'Publish pylint'
