@@ -24,4 +24,4 @@ steps:
     targetType: 'inline'
     script: |
       mkdir /tmp/config-custom
-      docker run --rm -v $pwd:/pylint -v $pwd/test:/tmp/config-custom almerhor/pylint:default py/covidlambda.py #requirements-custom.txt
+      docker run --rm -v $(pwd):/pylint -v $(pwd)/test:/tmp/config-custom almerhor/pylint:default py/covidlambda.py #requirements-custom.txt
