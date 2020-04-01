@@ -41,13 +41,13 @@ steps:
 #   displayName: 'pylint'
 
 - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        pip install flake8
-        pip install -r requirements.txt
-        flake8 py/covidlambda.py --statistics=true --output-file report.txt
-    displayName: 'flake8'
+  inputs:
+    targetType: 'inline'
+    script: |
+      pip install flake8
+      pip install -r requirements.txt
+      flake8 py/covidlambda.py --statistics=true --output-file report.txt
+  displayName: 'flake8'
 
 # - task: PublishTestResults@2
 #   inputs:
