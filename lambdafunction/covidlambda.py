@@ -129,7 +129,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
                        "specific data, like recoveries or active cases.")
 
         handler_input.response_builder.speak(speech_text).set_card(
-            SimpleCard("Corona Informator", speech_text)).set_should_end_session(
+            SimpleCard(SIMPLE_CARD, speech_text)).set_should_end_session(
                 False)
         return handler_input.response_builder.response
 
@@ -185,7 +185,7 @@ class HelpIntentHandler(AbstractRequestHandler):
 
         handler_input.response_builder.speak(speech_text).ask(
             speech_text).set_card(SimpleCard(
-                "Corona Informator", speech_text))
+                SIMPLE_CARD, speech_text))
         return handler_input.response_builder.response
 
 
@@ -201,7 +201,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
         speech_text = "Goodbye!"
 
         handler_input.response_builder.speak(speech_text).set_card(
-            SimpleCard("Corona Informator", speech_text))
+            SimpleCard(SIMPLE_CARD, speech_text))
         return handler_input.response_builder.response
 
 
