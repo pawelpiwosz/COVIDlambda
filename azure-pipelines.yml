@@ -23,13 +23,13 @@ steps:
 - task: Python Unit Test@0
   inputs:
     pythonroot: 'lambdafunction'
-    coveragedir: 'coverage'
+    coveragedir: 'coverage/htmlcov/'
     testfilepattern: '**/*_test.py'
 
 # - task: Python Unit Test@0
 #   inputs:
 #     pythonroot: 'lambdafunction/'
-#     reqfile: 'requirements.txt'
+#     reqfile: 'requirement.txt'
 #     coveragedir: 'coverage'
 #     testfilepattern: 'tests/test_*.py'
 
