@@ -48,8 +48,6 @@ steps:
 #     script: |
 #       ls -al
 #       ls -al coverage/htmlcov
-
-pytest i pyteestlambda recznie
     
 - task: SonarCloudPrepare@1
   inputs:
