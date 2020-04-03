@@ -2,3 +2,4 @@
 virtualenv/covid
 __pycache__
 .pytest_cache
+reports

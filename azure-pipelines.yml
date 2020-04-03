@@ -15,23 +15,32 @@ steps:
     script: |
       pip install pylint
       pip install -r requirements.txt
-      mkdir tests
+      mkdir reports
       ls -al
       pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
   displayName: 'pylint'
 
-- task: Python Unit Test@0
+- task: Bash@3
   inputs:
-    pythonroot: 'lambdafunction'
-    coveragedir: 'coverage/htmlcov/'
-    testfilepattern: '**/*_test.py'
+    targetType: 'inline'
+    script: |
+      pip install pytest
+      pip install pytest-lambda
+      pytest ./tests/ --junitxml=reports/coverage.xml
+  displayName: 'pytest'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/coverage.xml'
+    testRunTitle: 'Pytest'
+  displayName: 'Publish test results'
 
 # - task: Python Unit Test@0
 #   inputs:
-#     pythonroot: 'lambdafunction/'
-#     reqfile: 'requirement.txt'
-#     coveragedir: 'coverage'
-#     testfilepattern: 'tests/test_*.py'
+#     pythonroot: 'lambdafunction'
+#     coveragedir: 'coverage/htmlcov/'
+#     testfilepattern: '**/*_test.py'
 
 # - task: Bash@3
 #   inputs:
@@ -40,17 +49,7 @@ steps:
 #       ls -al
 #       ls -al coverage/htmlcov
 
-# - task: PublishTestResults@2
-#   inputs:
-#     testResultsFormat: 'JUnit'
-#     testResultsFiles: '**/*.xml'
-
-# - task: PublishCodeCoverageResults@1
-#   inputs:
-#     codeCoverageTool: 'JaCoCo'
-#     summaryFileLocation: '**/*.xml'
-#     pathToSources: 'lambdafunction'
-#     reportDirectory: 'coverage/htmlcov'
+pytest i pyteestlambda recznie
     
 - task: SonarCloudPrepare@1
   inputs:
@@ -65,7 +64,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.python.coverage.reportPaths="coverage/*.xml"
+      sonar.python.coverage.reportPaths="reports/coverage.xml"
 
 - task: SonarCloudAnalyze@1
 
@@ -83,7 +82,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'tests/'
+    targetPath: 'reports/'
     artifact: 'reports'
     publishLocation: 'pipeline'
   displayName: 'Publish reports'
