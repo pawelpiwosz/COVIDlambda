@@ -39,6 +39,13 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/*.xml'
 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '**/*.xml'
+    pathToSources: 'lambdafunction'
+    reportDirectory: 'coverage/htmlcov'
+    
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonarcloud-covidlambda'
