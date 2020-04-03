@@ -60,8 +60,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.python.coverage.reportPaths=reports/coverage.xml
-      sonar.junit.reportPaths=reports/*.xml
+      sonar.python.coverage.reportPaths=**/*.xml
+      sonar.junit.reportPaths=**/*.xml
 
 - task: SonarCloudAnalyze@1
 
