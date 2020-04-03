@@ -29,17 +29,23 @@ steps:
       #pip install pytest
       pip install pytest-lambda
       pip install pytest-cov
-      pytest tests --junitxml=reports/coverage.xml --cov=. --cov-report=xml --cov-report=html
+      pytest tests --junitxml=reports/test-results.xml --cov=. --cov-report=xml --cov-report=html
   displayName: 'pytest'
   continueOnError: true 
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/coverage.xml'
+    testResultsFiles: '**/test-results.xml'
     testRunTitle: 'Pytest'
     failTaskOnFailedTests: false
   displayName: 'Publish test results'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
 
 # - task: Python Unit Test@0
 #   inputs:
