@@ -28,7 +28,7 @@ steps:
     configMode: 'manual'
     cliProjectKey: 'covidlambda'
     cliProjectName: 'COVIDlambda'
-    cliSources: '.'
+    cliSources: 'lambdafunction'
 
 - task: SonarCloudAnalyze@1
 
