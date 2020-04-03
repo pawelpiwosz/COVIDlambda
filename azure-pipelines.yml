@@ -22,7 +22,7 @@ steps:
 
 - task: Python Unit Test@0
   inputs:
-    pythonroot: 'lambdafunction'
+    pythonroot: 'lambdafunction/'
     reqfile: 'requirements.txt'
     coveragedir: 'coverage'
     testfilepattern: 'tests/test_*.py'
@@ -32,7 +32,12 @@ steps:
     targetType: 'inline'
     script: |
       ls -al
-      ls -al coverage
+      ls -al coverage/htmlcov
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/*.xml'
 
 - task: SonarCloudPrepare@1
   inputs:
