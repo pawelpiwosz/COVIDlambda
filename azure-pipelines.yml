@@ -37,7 +37,7 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/coverage.xml'
     testRunTitle: 'Pytest'
-    failTaskOnFailedTests: true
+    failTaskOnFailedTests: false
   displayName: 'Publish test results'
 
 # - task: Python Unit Test@0
