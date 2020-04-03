@@ -24,6 +24,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      pwd
+      export PYTHONPATH="$(pwd)"
       pip install pytest
       pip install pytest-lambda
       pytest tests --junitxml=reports/coverage.xml
