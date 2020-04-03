@@ -13,6 +13,8 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model.ui import SimpleCard
 from ask_sdk_model import Response
 
+SIMPLE_CARD = "Corona Informator"
+
 sb = SkillBuilder()
 
 logger = logging.getLogger(__name__)
@@ -99,9 +101,6 @@ def create_response_country(payload, range, country):
             'todayDeaths': ['today', 'current'],
             'recovered': ['recovered']
         }
-        # if range not in states:
-        #     message = "I do not know this state."
-        #     return message
         for states_key in states:
             aliases = states[states_key]
             if range in aliases:
@@ -164,7 +163,7 @@ class InfoIntentHandler(AbstractRequestHandler):
         speech_text = speak
 
         handler_input.response_builder.speak(speech_text).set_card(
-            SimpleCard("Corona Informator", speech_text)).set_should_end_session(
+            SimpleCard(SIMPLE_CARD, speech_text)).set_should_end_session(
                 True)
         return handler_input.response_builder.response
 
