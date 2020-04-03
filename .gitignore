@@ -1,2 +1,4 @@
 *.zip
 virtualenv/covid
+__pycache__
+.pytest_cache

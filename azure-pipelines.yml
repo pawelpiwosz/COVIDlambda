@@ -17,17 +17,8 @@ steps:
       pip install -r requirements.txt
       mkdir tests
       ls -al
-      pylint py/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
+      pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
   displayName: 'pylint'
-
-# - task: ArchiveFiles@2
-#   inputs:
-#     rootFolderOrFile: 'py/covidlambda.py'
-#     includeRootFolder: true
-#     archiveType: 'zip'
-#     archiveFile: 'artifacts/covidlambda.zip'
-#     replaceExistingArchive: true
-#   displayName: 'Pack artifact'
 
 - task: SonarCloudPrepare@1
   inputs:
@@ -37,7 +28,7 @@ steps:
     configMode: 'manual'
     cliProjectKey: 'covidlambda'
     cliProjectName: 'COVIDlambda'
-    cliSources: 'py/'
+    cliSources: '.'
 
 - task: SonarCloudAnalyze@1
 

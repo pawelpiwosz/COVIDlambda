@@ -6,6 +6,6 @@ pwd
 ls ../../../../
 zip -g -r ./../../../../artifacts/covidlambda.zip . 
 cd ../../../../
-cd py
+cd lambdafunction
 zip -g ../artifacts/covidlambda.zip covidlambda.py
 cd ..
