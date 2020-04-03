@@ -61,6 +61,7 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.python.coverage.reportPaths=reports/coverage.xml
+      sonar.junit.reportPaths=reports/*.xml
 
 - task: SonarCloudAnalyze@1
 
