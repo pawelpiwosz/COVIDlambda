@@ -22,29 +22,35 @@ steps:
 
 - task: Python Unit Test@0
   inputs:
-    pythonroot: 'lambdafunction/'
-    reqfile: 'requirements.txt'
+    pythonroot: 'lambdafunction'
     coveragedir: 'coverage'
-    testfilepattern: 'tests/test_*.py'
+    testfilepattern: '**/*_test.py'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      ls -al
-      ls -al coverage/htmlcov
+# - task: Python Unit Test@0
+#   inputs:
+#     pythonroot: 'lambdafunction/'
+#     reqfile: 'requirements.txt'
+#     coveragedir: 'coverage'
+#     testfilepattern: 'tests/test_*.py'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/*.xml'
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       ls -al
+#       ls -al coverage/htmlcov
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '**/*.xml'
-    pathToSources: 'lambdafunction'
-    reportDirectory: 'coverage/htmlcov'
+# - task: PublishTestResults@2
+#   inputs:
+#     testResultsFormat: 'JUnit'
+#     testResultsFiles: '**/*.xml'
+
+# - task: PublishCodeCoverageResults@1
+#   inputs:
+#     codeCoverageTool: 'JaCoCo'
+#     summaryFileLocation: '**/*.xml'
+#     pathToSources: 'lambdafunction'
+#     reportDirectory: 'coverage/htmlcov'
     
 - task: SonarCloudPrepare@1
   inputs:
