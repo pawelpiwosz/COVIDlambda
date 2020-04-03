@@ -20,6 +20,13 @@ steps:
       pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
   displayName: 'pylint'
 
+- task: Python Unit Test@0
+  inputs:
+    pythonroot: 'lambdafunction'
+    reqfile: 'requirements.txt'
+    coveragedir: 'coverage'
+    testfilepattern: 'test_.py'
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonarcloud-covidlambda'
