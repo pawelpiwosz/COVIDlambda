@@ -43,6 +43,11 @@ steps:
     cliProjectKey: 'covidlambda'
     cliProjectName: 'COVIDlambda'
     cliSources: 'lambdafunction'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.python.coverage.reportPaths="coverage/*.xml"
 
 - task: SonarCloudAnalyze@1
 
