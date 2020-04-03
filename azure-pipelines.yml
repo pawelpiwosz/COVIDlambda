@@ -17,7 +17,7 @@ steps:
       pip install -r requirements.txt
       mkdir reports
       ls -al
-      pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > tests/report.txt
+      pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > reports/pylint.txt
   displayName: 'pylint'
 
 - task: Bash@3
@@ -26,9 +26,10 @@ steps:
     script: |
       pwd
       export PYTHONPATH="$(pwd)"
-      pip install pytest
+      #pip install pytest
       pip install pytest-lambda
-      pytest tests --junitxml=reports/coverage.xml
+      pip install pytest-cov
+      pytest tests --junitxml=reports/coverage.xml --cov=. --cov-report=xml --cov-report=html
   displayName: 'pytest'
   continueOnError: true 
 
@@ -79,7 +80,7 @@ steps:
     targetType: 'inline'
     script: |
       pip install cfn-lint
-      cfn-lint -I -f parseable cloudformation/covidlambda.yml > tests/cf.txt
+      cfn-lint -I -f parseable cloudformation/covidlambda.yml > reports/cf.txt
   displayName: 'cfnlint'
 
 - task: PublishPipelineArtifact@1
