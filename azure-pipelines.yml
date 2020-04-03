@@ -30,12 +30,14 @@ steps:
       pip install pytest-lambda
       pytest tests --junitxml=reports/coverage.xml
   displayName: 'pytest'
+  continueOnError: true 
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/coverage.xml'
     testRunTitle: 'Pytest'
+    failTaskOnFailedTests: true
   displayName: 'Publish test results'
 
 # - task: Python Unit Test@0
