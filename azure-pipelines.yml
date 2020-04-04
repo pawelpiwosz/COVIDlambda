@@ -38,7 +38,7 @@ steps:
       # pip install pytest-lambda
       # pip install pytest-cov
       #pip install -r requirements.txt
-      pytest tests --junitxml=reports/test-results.xml --cov=. --cov-report=xml --cov-report=html
+      pytest tests -vv --junitxml=reports/test-results.xml --cov=. --cov-report=xml --cov-report=html
   displayName: 'pytest'
   continueOnError: true 
 
