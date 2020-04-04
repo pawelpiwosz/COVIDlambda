@@ -13,10 +13,17 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      pip install pylint
-      pip install -r requirements.txt
-      mkdir reports
-      ls -al
+    mkdir reports
+    pip install -r requirements.txt
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # pip install pylint
+      # pip install -r requirements.txt
+      # mkdir reports
+      # ls -al
       pylint lambdafunction/covidlambda.py --exit-zero --reports=yes --output-format=msvs > reports/pylint.txt
   displayName: 'pylint'
 
@@ -29,7 +36,7 @@ steps:
       #pip install pytest
       # pip install pytest-lambda
       # pip install pytest-cov
-      pip install -r requirements.txt
+      #pip install -r requirements.txt
       pytest tests --junitxml=reports/test-results.xml --cov=. --cov-report=xml --cov-report=html
   displayName: 'pytest'
   continueOnError: true 
