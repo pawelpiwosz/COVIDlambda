@@ -61,6 +61,6 @@ class TestServiceHandler:
                                                      'recovered.</speak>',
                                              'type': 'SSML'}},
                'shouldEndSession': False},
-  'userAgent': 'ask-python/1.9.0 Python/3.8.1',
+  'userAgent': 'ask-python/1.9.0 Python/3.8.2',
   'version': '1.0'
         }
