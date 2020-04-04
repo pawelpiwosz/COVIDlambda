@@ -16,7 +16,6 @@ steps:
       mkdir reports
       pip install -r requirements.txt
       chmod +x virtualenv/scripts/*.sh
-      export PYTHONPATH="$(pwd)"
   displayName: 'Prepare env'
 
 - task: Bash@3
@@ -31,7 +30,7 @@ steps:
     targetType: 'inline'
     script: |
       pwd
-      #export PYTHONPATH="$(pwd)"
+      export PYTHONPATH="$(pwd)"
       pytest tests -vv --junitxml=reports/test-results.xml --cov=. --cov-report=xml --cov-report=html
   displayName: 'pytest'
   continueOnError: true 
