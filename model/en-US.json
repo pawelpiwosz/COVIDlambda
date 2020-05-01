@@ -89,6 +89,17 @@
                     "name": "DetailSlot",
                     "values": [
                         {
+                            "id": "tests",
+                            "name": {
+                                "value": "tests",
+                                "synonyms": [
+                                    "checked",
+                                    "checks",
+                                    "tested"
+                                ]
+                            }
+                        },
+                        {
                             "id": "all",
                             "name": {
                                 "value": "All",
