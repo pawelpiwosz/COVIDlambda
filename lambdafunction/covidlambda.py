@@ -34,11 +34,11 @@ def get_data(country):
     """ Get data from api """
     urlbase = 'https://corona.lmao.ninja/'
     if country == "all":
-        url = '{}all'.format(
+        url = '{}v2/all'.format(
             urlbase
         )
     else:
-        url = '{}countries/{}'.format(
+        url = '{}v2/countries/{}'.format(
             urlbase,
             country
         )
@@ -49,11 +49,12 @@ def create_response_all(payload, range):
     """ Create response for Alexa with world data"""
     response_start = "Global information"
     if range == "all":
-        response_line = "Cases {}, deaths {}, recovered {}, active {}".format(
+        response_line = "Cases {}, deaths {}, recovered {}, active {}, tests {}".format(
             payload['cases'],
             payload['deaths'],
             payload['recovered'],
-            payload['active']
+            payload['active'],
+            payload['tests']
         )
         message = "{}. {}".format(
             response_start,
@@ -80,7 +81,9 @@ def create_response_country(payload, range, country):
                          "all deaths {}, "
                          "recovered {}. "
                          "Cases per million {}, "
-                         "deaths per million {}.").format(
+                         "deaths per million {}. "
+                         "Executed tests {}, "
+                         "which means {} tests per milion.").format(
                              payload['cases'],
                              payload['todayCases'],
                              payload['active'],
@@ -89,7 +92,9 @@ def create_response_country(payload, range, country):
                              payload['deaths'],
                              payload['recovered'],
                              payload['casesPerOneMillion'],
-                             payload['deathsPerOneMillion']
+                             payload['deathsPerOneMillion'],
+                             payload['tests'],
+                             payload['testsPerOneMillion']
                              )
     else:
         states = {
@@ -99,7 +104,8 @@ def create_response_country(payload, range, country):
             'critical': ['critical'],
             'deaths': ['fatalities', 'deaths', 'casualties'],
             'todayDeaths': ['today', 'current'],
-            'recovered': ['recovered']
+            'recovered': ['recovered'],
+            'tests': ['tests', 'tested', 'checked']
         }
         for states_key in states:
             aliases = states[states_key]
