@@ -1,5 +1,11 @@
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - cloudformation/*
+    - azure-pipelines-cf.yml
 
 pool:
   vmImage: 'ubuntu-latest'
