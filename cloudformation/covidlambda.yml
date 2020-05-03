@@ -12,9 +12,9 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Join
-        - ''
+        - '-'
         - - Fn::Sub: ${AWS::Region}
-          - "-covid-lambda"
+          - "covid-lambda"
 
   AlexaCovidLambdaRole:
     Type: AWS::IAM::Role
