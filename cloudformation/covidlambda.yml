@@ -42,7 +42,13 @@ Resources:
                   - s3:ListBucket
                   - s3:GetObject
                 Resource: 
-                  - !Ref CovidBucket
+                  - 
+                    !Join
+                      - ''
+                      - - 'arn:aws:s3:::'
+                        - Ref: CovidBucket
+
+                !Ref CovidBucket
               -
                 Effect: Allow
                 Action:
