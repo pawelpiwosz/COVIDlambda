@@ -1,5 +1,16 @@
 trigger:
-- master
+  branches:
+    - master
+  paths:
+    include:
+    - cloudformation/*
+    exclude:
+    - README.md
+    - azure-pipelines.yml
+    - models/
+    - lambdafunction/*
+    - tests/*
+
 
 pool:
   vmImage: 'ubuntu-latest'
