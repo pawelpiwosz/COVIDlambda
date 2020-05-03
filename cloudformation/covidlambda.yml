@@ -8,6 +8,14 @@ Parameters:
     Description: Enter skill ARN here
 
 Resources:
+  CovidBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Name: !Join
+        - ''
+        - - Fn::Sub: ${AWS::Region}
+          - "-covid-lambda"
+
   AlexaCovidLambdaRole:
     Type: AWS::IAM::Role
     Properties:
@@ -34,12 +42,7 @@ Resources:
                   - s3:ListBucket
                   - s3:GetObject
                 Resource: 
-                  -
-                    !Join
-                      - ''
-                      - - 'arn:aws:s3:::'
-                        - Fn::Sub: ${AWS::Region}
-                        - "-covid-lambda"
+                  - !Ref CovidBucket
               -
                 Effect: Allow
                 Action:
@@ -79,7 +82,7 @@ Resources:
       Description: Alexa CovidLambda Main Function
       FunctionName: CovidLambda
       Code:
-        S3Bucket: !Sub "${AWS::Region}-covid-lambda"
+        S3Bucket: !Ref CovidBucket
         S3Key: covidlambda.zip
       Runtime: python3.6
       Handler: covidlambda.handler
