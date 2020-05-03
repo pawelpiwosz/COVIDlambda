@@ -7,14 +7,16 @@ Parameters:
     Default: None
     Description: Enter skill ARN here
 
+  LambdaCovidBucketName:
+    Type: String
+    Default: somebucketnamehere
+    Description: Enter Bucket name for store functiion code
+
 Resources:
   CovidBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Join
-        - '-'
-        - - Fn::Sub: ${AWS::Region}
-          - "covid-lambda"
+      BucketName: !Ref LambdaCovidBucketName
 
   AlexaCovidLambdaRole:
     Type: AWS::IAM::Role
