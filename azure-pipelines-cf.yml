@@ -55,6 +55,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      export $(AWS_SECRET_ACCESS_KEY)
+      export $(AWS_ACCEESS_KEY_ID)
       taskcat test run
       mv taskcat_outputs reports/
   displayName: 'Taskcat test run'
