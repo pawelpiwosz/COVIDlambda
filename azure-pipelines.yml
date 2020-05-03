@@ -6,6 +6,7 @@ trigger:
     exclude:
     - cloudformation/*
     - azure-pipelines-cf.yml
+    - .taskcat*
 
 pool:
   vmImage: 'ubuntu-latest'
