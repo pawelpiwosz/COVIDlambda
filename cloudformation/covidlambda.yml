@@ -23,7 +23,7 @@ Resources:
       Path: /CovidLambda/
       RoleName: !Join
         - '-'
-        - - ${AWS::Region}
+        - - Fn::Sub: ${AWS::Region}
           - 'iam-role-alexa-CovidLambda'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
