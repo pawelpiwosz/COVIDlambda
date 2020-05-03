@@ -55,10 +55,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      export $(AWS_SECRET_ACCESS_KEY)
-      export $(AWS_ACCEESS_KEY_ID)
       taskcat test run
       mv taskcat_outputs reports/
+  env:
+    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+
   displayName: 'Taskcat test run'
 
 - task: PublishPipelineArtifact@1
