@@ -21,7 +21,10 @@ Resources:
     Properties:
       Description: IAM role for Main Alexa-CovidLambda function created by Cloudformation
       Path: /CovidLambda/
-      RoleName: iam-role-alexa-CovidLambda
+      RoleName: !Join
+        - '-'
+        - - ${AWS::Region}
+          - 'iam-role-alexa-CovidLambda'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
