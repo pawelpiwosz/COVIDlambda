@@ -6,6 +6,7 @@ trigger:
     include:
     - cloudformation/*
     - azure-pipelines-cf.yml
+    - .taskcat*
     exclude:
     - README.md
     - azure-pipelines.yml
@@ -50,6 +51,14 @@ steps:
   # > reports/cf.txt
   displayName: 'cfnlint'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      taskcat test run
+      mv taskcat_outputs reports/
+  displayName: 'Taskcat test run'
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: 'reports/'
@@ -61,10 +70,4 @@ steps:
   inputs:
     PathtoPublish: 'cloudformation'
     ArtifactName: 'covidlambda-cf'
-    publishLocation: 'Container'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'artifacts'
-    ArtifactName: 'covidlambda'
     publishLocation: 'Container'
