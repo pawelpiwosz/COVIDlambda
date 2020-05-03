@@ -11,7 +11,7 @@ Resources:
   CovidBucket:
     Type: AWS::S3::Bucket
     Properties:
-      Name: !Join
+      BucketName: !Join
         - ''
         - - Fn::Sub: ${AWS::Region}
           - "-covid-lambda"
