@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - cloudformation/*
+    - azure-pipelines-cf.yml
     exclude:
     - README.md
     - azure-pipelines.yml
