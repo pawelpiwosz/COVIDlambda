@@ -27,7 +27,8 @@ steps:
     script: |
       mkdir reports
       pip install cfn-lint
-      cfn-lint -I -f parseable cloudformation/covidlambda.yml > reports/cf.txt
+      cfn-lint -I -f parseable cloudformation/covidlambda.yml 
+# > reports/cf.txt
   displayName: 'cfnlint'
 
 - task: PublishPipelineArtifact@1
