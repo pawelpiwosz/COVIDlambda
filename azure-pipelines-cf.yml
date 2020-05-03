@@ -13,7 +13,6 @@ trigger:
     - lambdafunction/*
     - tests/*
 
-
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -27,7 +26,26 @@ steps:
     targetType: 'inline'
     script: |
       mkdir reports
+      pip install -r requirements.txt
       pip install cfn-lint
+      pip install taskcat
+      chmod +x virtualenv/scripts/*.sh
+  displayName: 'Prepare env'
+
+- task: Bash@3
+  inputs:
+    filePath: 'virtualenv/scripts/virtualenv.sh'
+  displayName: 'Create Virtualenv'
+
+- task: Bash@3
+  inputs:
+    filePath: 'virtualenv/scripts/pack.sh'
+  displayName: 'Create artifact'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
       cfn-lint -I -f parseable cloudformation/covidlambda.yml 
   # > reports/cf.txt
   displayName: 'cfnlint'
@@ -43,4 +61,10 @@ steps:
   inputs:
     PathtoPublish: 'cloudformation'
     ArtifactName: 'covidlambda-cf'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'covidlambda'
     publishLocation: 'Container'
