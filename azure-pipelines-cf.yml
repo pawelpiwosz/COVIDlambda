@@ -47,8 +47,15 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      cfn-lint -I -f parseable cloudformation/covidlambda.yml 
-  # > reports/cf.txt
+      echo "Remove obsolete files"
+      rm -rf covid/
+  displayName: 'Cleaning'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      cfn-lint -I -f parseable cloudformation/covidlambda.yml > reports/cf.txt
   displayName: 'cfnlint'
 
 - task: Bash@3
