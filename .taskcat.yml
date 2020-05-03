@@ -1,0 +1,10 @@
+project:
+  name: infra-test-build
+  regions:
+    - eu-central-1
+    - us-east-1
+    - us-west-1
+
+tests:
+  test-build:
+    template: cloudformation/covidlambda.yml

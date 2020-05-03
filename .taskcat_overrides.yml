@@ -1,0 +1,2 @@
+SkillArn: amzn1.ask.skill.00000000-0000-0000-0000-000000000000
+LambdaCovidBucketName: $[taskcat_autobucket]-$[taskcat_random-numbers]
